@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/signUp.css')}}">
+    </script>
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="container">
+            <div class="left_container">
+                <div class="left_container__div">
+                    <img class="company_logo" src="../static/assets/2.png" alt="">
+
+                    <h1 class="left_container__title">A smarter way to manage your money.</h1>
+                    <h2 class="left_container__subtitle">80% of people save money by using Zync to find and cancel
+                        unwanted subscriptions!</h2>
+
+                    <h3 class="left_container__ul__info__title">With Zync, You can also... </h3>
+                    <div class="left_container__ul__cont">
+                        <ul class="left_container__ul">
+                            <li class="left_container__li">Effortlessly tack your spending</li>
+                            <li class="left_container__li">Easly lower bills</li>
+                            <li class="left_container__li">Track your net worth</li>
+                            <li class="left_container__li">Check your credit score</li>
+                        </ul>
+                        <img class="img1" src="../static/assets/SignUpPage.png" alt="Image of a women throwing money">
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_container">
+                <form action="/register" method="post">
+                    <h3 class="right_container__title">Create your Zync Account!</h3>
+
+                    {% with messages = get_flashed_messages(category_filter="first_name_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="first_name-error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <input name="first_name" class="first_name" type="text" autocomplete="off" placeholder="First Name"
+                        value="{{session['first_name']}}">
+
+
+                    {% with messages = get_flashed_messages(category_filter="last_name_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="last_name-error errors ">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <input name="last_name" class="last_name" type="text" placeholder=" Last Name "
+                        value="{{session['last_name']}}">
+
+                    {% with messages = get_flashed_messages(category_filter="email_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="email_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    {% with messages = get_flashed_messages(category_filter="exsist") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="email_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <input name="email" class="email" type="text" placeholder="Email" value="{{session['email']}}">
+
+                    {% with messages = get_flashed_messages(category_filter="password_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="password_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="password-field">
+                        <input name="password" class="password" type="password" placeholder="Password" id="password">
+                        <div class="passwordBtn">
+                            <i class="fa fa-eye"></i>
+                            <i class="fa fa-eye-slash"></i>
+                        </div>
+                    </div>
+
+
+
+                    {% with messages = get_flashed_messages(category_filter="accepted_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="password_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="right_container__accepted">
+                        <input class="accepted" type="checkbox" value="1" name="accepted">
+                        <div class="right_container__accepted__text">
+                            <label class="accepted_terms">I agree to the Zync <a class="txtbrow"
+                                    href="/term/of/service">Terms of service</a> and <a class="txtbrow"
+                                    href="/privacy/policy">Privacy policy.</a>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="form_submit_button">Create Account</button>
+                    <a class="right_container__login__link" href="/login/user">Already have an Zync Account? Log
+                        in</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const passwordInput = document.getElementById('password');
+        const passwordBtn = document.querySelector('.passwordBtn');
+        const showPasswordIcon = passwordBtn.querySelector('.fa-eye-slash');
+        const hidePasswordIcon = passwordBtn.querySelector('.fa-eye');
+        const passwordState = localStorage.getItem('passwordState');
+
+        if (passwordState === 'hidden') {
+            passwordInput.type = 'password';
+            showPasswordIcon.style.display = 'block';
+            hidePasswordIcon.style.display = 'none';
+            showPasswordIcon.classList.add('active');
+        } else {
+            passwordInput.type = 'text';
+            showPasswordIcon.style.display = 'none';
+            hidePasswordIcon.style.display = 'block';
+            hidePasswordIcon.classList.add('active');
+        }
+
+        passwordBtn.addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                showPasswordIcon.style.display = 'none';
+                hidePasswordIcon.style.display = 'block';
+                showPasswordIcon.classList.remove('active');
+                hidePasswordIcon.classList.add('active');
+                localStorage.setItem('passwordState', 'visible');
+            } else {
+                passwordInput.type = 'password';
+                showPasswordIcon.style.display = 'block';
+                hidePasswordIcon.style.display = 'none';
+                hidePasswordIcon.classList.remove('active');
+                showPasswordIcon.classList.add('active');
+                localStorage.setItem('passwordState', 'hidden');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

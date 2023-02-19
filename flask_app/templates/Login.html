@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/login.css')}}">
+    </script>
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="container">
+            <img class="company_logo" src="../static/assets/2.png" alt="">
+            <div class="nav_container">
+                <h1 class="nav_text">Sign in to your Zync Account!</h1>
+            </div>
+            <div class="form_container">
+
+                <form action="/login/user" method="POST">
+                    {% with messages = get_flashed_messages()%}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="password_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <input class="email__login" type="email" id="email" name="email" required placeholder="Email">
+
+                    <input class="password_login" type="password" id="password" name="password" required
+                        placeholder="Password">
+
+                    <button class="submit" type="submit">Login</button>
+                    <a class="create_account__link" href="/register">New to Zync? <span class="txtbrow">Sign Up
+                            Here.</span></a>
+                    <a class="forgot_password_login" href="/login/link/show">Forgot Password?</a>
+                    <div class="other_links">
+                        <a class="forgot_password_login" href="/login/link/show">Need Help?</a>
+                        <a class="forgot_password_login" href="/privacy/policy">Terms of Service</a>
+                        <a class="forgot_password_login" href="/privacy/policy">Privacy Policy</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

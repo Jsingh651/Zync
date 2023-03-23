@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jang's Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="./app.js" defer></script>
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("K186n3klexni0hH1l");
+        })();
+    </script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700;900&display=swap');
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Roboto', sans-serif;
+}
+
+
+body{
+    background-color: #ffffff;
+}
+p{
+    line-height: 1.5;
+    font-size: 14px ;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+
+input, textarea{
+    width: 100%;
+    background-color:#d2cece ;
+    color: rgb(0, 0, 0);
+    outline: none;
+    border: none;
+    height: 60px;
+    transition: all 300ms ease;
+    resize: none;
+    border-radius: 6px;
+    text-indent: 8px;
+    text-indent: 10px 4px 4px 12px;
+}
+textarea{
+    height: 100px;
+}
+label{
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* MODAL */
+
+.modal{
+margin: 0 auto;
+margin-top: 3%;
+width: 50%;
+}
+
+
+.modal__half{
+margin: 0 auto;
+width: 80%;
+
+
+}
+
+.modal__contact{
+    color: rgb(0, 0, 0);
+    margin: 0 auto;
+}
+
+
+.modal__title{
+    font-size: 36px;
+}
+
+.modal__sub-title{
+    margin: 12px 0 24px 0;
+    font-size: 14px;
+}
+
+.form__item{
+    margin-bottom: 20px;
+}
+
+.form__submit{
+    background-color: #f06449;
+    border: 2px solid #f06449;
+    color: white;
+    font-weight: 700;
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    padding: 6px 12px;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: all 300ms ease;
+}
+
+a{
+    background-color: #f06449;
+    border: 2px solid #f06449;
+    color: white;
+    font-weight: 700;
+    width: 100%;
+    max-width: 240px;
+    padding: 6px 12px;
+    margin-top: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: all 300ms ease;
+}
+a:hover{
+    border-color: #fff;
+    background-color: black;
+}
+
+a:active{
+        border-color: #f06449;
+    color: #f06449;
+}
+.form__submit:hover{
+    border-color: #fff;
+    background-color: black;
+}
+
+.form__submit:active{
+    border-color: #f06449;
+    color: #f06449;
+}
+
+.modal__overlay{
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.modal__overlay--loading{
+    background-color: #242424 ;
+    font-size: 60px;
+    z-index: -1;
+}
+
+.modal__overlay--success{
+background-color: #ffffff;
+color: black;
+font-size: 26px;
+border-radius: 8px;
+font-weight: bold;
+text-align: center;
+display: flex;
+flex-direction: column;
+padding: 28px;
+margin-top: 2%;
+margin-bottom: 1%;
+
+}
+
+.modal__overlay--visible{
+    z-index: 0;
+    display: flex;
+}
+
+
+.fa-spinner{
+animation: spinner 860ms infinite ;
+}
+
+@keyframes spinner{
+    0%{
+        transform: rotate(0);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div class="modal">
+        <div class="modal__half modal__contact">
+            <h3 class="modal__title modal__title--contact">Contact Form</h3>
+            <h3 class="modal__sub-title modal__sub-title-contact">If you have any questions or concerns please leave us a email and we will get back to you as soon as possible.</h3>
+            <form action="" id="contact__form" onsubmit="contact(event)">
+                <div class="form__item">
+                    <label class="for__item--label">Your Name</label>
+                    <input class="input" name="user_name" type="text"> </input>
+                </div>
+                <div class="form__item">
+                    <label class="for__item--label">Your Email</label>
+                    <input class="input" name="user_email" type="text"> </input>
+                </div>
+                <div class="form__item">
+                    <label class="for__item--label">Message</label>
+                    <textarea class="input" name="message" type="text"> </textarea>
+                </div>
+                <button id="contact__submit" class="form__submit">
+                    Submit
+                </button>
+            </form>
+            <div class="modal__overlay modal__overlay--loading ">
+                <i class="fas fa-spinner"></i>
+            </div>
+            <div class="modal__overlay modal__overlay--success">
+                Thanks for the message looking forward to get in contact with you soon!
+                <a href="/dashboard"> Back to home?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function contact(event) {
+            event.preventDefault();
+            const loading = document.querySelector('.modal__overlay--loading')
+            const success = document.querySelector('.modal__overlay--success')
+            loading.classList += " modal__overlay--visible"
+            emailjs
+                .sendForm(
+                    'service_bqx4s2d',
+                    'template_74y021e',
+                    event.target,
+                    'K186n3klexni0hH1l'
+                ).then(() => {
+                    loading.classList.remove("modal__overlay--visible")
+                    success.classList += " modal__overlay--visible"
+                }).catch(() => {
+                    loading.classList.remove("modal__overlay--visible")
+                    alert(
+                        "The email service is temperorly unavailble. Please directly contact me on jangsing02@gmail.ocm"
+                    )
+                })
+        }
+
+
+    </script>
+</body>
+
+</html>

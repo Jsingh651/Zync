@@ -2,11 +2,15 @@ from flask_app import app, mail
 from flask_mail import Mail, Message
 from base64 import b64encode
 from flask_app import app
-from flask import Flask, redirect, session, request, render_template, url_for, flash
+from flask import Flask, redirect, session, request, render_template, flash,jsonify
 from flask_app.models.users import User
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
+# Available environments are
+# 'Production'
+# 'Development'
+# 'Sandbox'
 
 @app.route("/")
 def index():
@@ -49,12 +53,18 @@ def register():
         'accepted': request.form['accepted'],
         'password': pw_hash
     }
-
     first_name = request.form['first_name']
     first_name.capitalize()
     
-    
     id = User.register(data)
+    # msg = Message(f"Welcome to Zync, {request.form['first_name']}!", sender="nono@gmail.com", recipients=[request.form['email']])
+    # msg.body = "welcome"
+    # with app.open_resource("static/assets/runningPeeps.png") as fp:
+    #     image_data = fp.read()
+    #     image_data_b64 = b64encode(image_data).decode('utf-8')
+    #     msg.html = render_template('WelcomeEmail.html', image=image_data_b64)
+    #     msg.attach("runningPeeps.png", "image/png", image_data, "inline", headers=[["Content-ID", "<logo>"]])
+    #     mail.send(msg)
     session['user_id'] = id
     session['username'] = data['first_name']
     print('session', session)
@@ -89,10 +99,12 @@ def dashboard():
     # if 'user_id' not in session:
     #     flash("You must be logged in to access the dashboard.")
     #     return redirect("/")
-    data = {'id': session['user_id']}
-    return render_template('dashboard.html', user = User.get_one(data))
+    # data = {'id': session['user_id']}
+    return render_template('dashboard.html')
 
-
+@app.route("/contactus")
+def contactuser():
+    return render_template("emails/contactus.html")
 
 @app.route('/logout')
 def logout():

@@ -14,10 +14,16 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.access_token = data.get('access_token', None)  # Add this line
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.accepted = data['accepted']
 
+    @classmethod
+    def update_access_token(cls, data):
+        query = "UPDATE users SET access_token = %(access_token)s WHERE id = %(id)s;"
+        return connectToMySQL(db).query_db(query, data)
+    
     @classmethod
     def get_all(cls):
         query = 'SELECT * FROM users'

@@ -10,3 +10,4 @@ app.config['MAIL_PASSWORD'] = 'zkgfklffuiukdcio'
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USE_TLS'] = False
 mail = Mail(app)
+

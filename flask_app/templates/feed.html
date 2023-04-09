@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/feed.css')}}">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="treact__nav">
+            <div class="row">
+                <div class="logo__mask">
+                    <img class="logo__img" src="../static/assets/2.png" alt="">
+                </div>
+                <ul class="nav__links">
+                    <li class="nav__list"><a class="a" href="/flight/page">Find Flights</a></li>
+                    <li class="nav__list"><a class="a" href="/dashboard">Find Places</a></li>
+
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                    <div class="signup">
+                        <!-- <li class="signup__login"><a href="/login/user">Login</a></li> -->
+                        <li class="signup__primary"><a class="a__primary" href="/create/review">Create Review</a></li>
+                    </div>
+                </ul>
+
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <ul class="menu__links">
+                        <li class="menu__list"><a href="/create/review" class="menu__link-primary"
+                                onclick="closeMenu()">Create Review</a>
+                        <li class="menu__list"><a href="/flight/page" class="menu__link" onclick="closeMenu()">Find
+                                flights</a></li>
+                        <li class="menu__list"><a href="/dashboard" class="menu__link" onclick="closeMenu()">Find
+                                Places</a></li>
+                        <li class="menu__list"><a href="/logout" class="menu__link" onclick="closeMenu()">logout</a>
+                        </li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <h1 class="title_search">Review's Feed</h1>
+    {% for i in content %}
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{i.user.first_name}} {{i.user.last_name}} <span class="name"><span class="reviewwro">wrote a review for</span> {{i.location_name}} </span>
+            </h2>
+            <h6 class="card-subtitle"><i class="fas fa-map-marker-alt"></i> {{', '.join(i.location.split(', ')[0:2])}}</h6>
+        </div>
+        <div class="card-body">
+            <div class="card-stars">
+                {% for star in range(i.stars) %}
+                <i class="fas fa-star fa-lg review__star--blue" style="color: #00b6e9;"></i>
+                {% endfor %}
+                {% for star in range(5-i.stars) %}
+                <i class="far fa-star fa-lg review__star--blue" style="color: #00b6e9;"></i>
+                {% endfor %}
+            </div>
+            <p class="card-date">{{i.date_going.strftime('%b, %Y')}}</p>
+            <div class="card-type">
+                {% if i.type == "Restaurant" %}
+                <p> <i class="fas fa-utensils"></i> {{i.type}}</p>
+                {% elif i.type == "Bar" %}
+                <p><i class="fas fa-glass-martini-alt"></i> {{i.type}} </p>
+                {% elif i.type == "Hotel" %}
+                <p>  <i class="fas fa-hotel"></i> {{i.type}}</p>
+                {% elif i.type == "Coffee" %}
+                <p>  <i class="fas fa-coffee"></i> {{i.type}}</p>
+                {% elif i.type == "Museums" %}
+                <p>  <i class="fas fa-university"></i> {{i.type}}</p>
+                {% elif i.type == "Stadium" %}
+                <p>  <i class="fas fa-futbol"></i> {{i.type}}</p>
+                {% elif i.type == "Sightseeing" %}
+                <p>  <i class="fas fa-binoculars"></i> {{i.type}}</p>
+                {% elif i.type == "Shopping" %}
+                <p>  <i class="fas fa-shopping-bag"></i> {{i.type}}</p>
+                {% elif i.type == "Parks" %}
+                <p>  <i class="fas fa-tree"></i> {{i.type}}</p>
+                {% elif i.type == "Hiking Trails" %}
+                <p>  <i class="fas fa-hiking"></i> {{i.type}}</p>
+                {% elif i.type == "Beaches" %}
+                <p> <i class="fas fa-umbrella-beach"></i>{{i.type}}</p>
+                
+                {% endif %}
+            </div>
+            <div class="card-text">
+                <p class="card-description">{{i.description}}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <p class="card-user">Posted by: {{i.user.first_name}} {{i.user.last_name}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    
+
+
+    <script>
+        function openMenu() {
+            document.body.classList += "menu--open"
+        }
+
+        function closeMenu() {
+            document.body.classList.remove('menu--open')
+        }
+    </script>
+
+
+</body>
+
+</html>

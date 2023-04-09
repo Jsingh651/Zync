@@ -1,0 +1,100 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Suggestions</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/flightSearch.css')}}">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- <script defer src="../static/js/flightSearch.js"></script> -->
+
+    <script defer src="{{ url_for('static', filename='js/flightSearch.js') }}"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="treact__nav">
+            <div class="row">
+                <div class="logo__mask">
+                    <img class="logo__img" src="../static/assets/2.png" alt="">
+                </div>
+                <ul class="nav__links">
+                    <li class="nav__list"><a class="a" href="/dashboard">Find places</a></li>
+                    <li class="nav__list"><a class="a" href="/show/feed">Feed</a></li>
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                    <li class="signup__primary"><a class="a__primary" href="/create/review">Review Places</a></li>
+                    <div class="signup">
+                    </div>
+                </ul>
+
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button  class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <ul class="menu__links">
+                        <li class="menu__list"><a href="#" class="menu__link" onclick="closeMenu()">Find Flights</a>
+                        </li>
+                        <li class="menu__list"><a href="/show/feed" class="menu__link" onclick="closeMenu()">Feed</a>
+                        </li>
+                        <li class="menu__list"><a href="/logout" class="menu__link" onclick="closeMenu()">Logout</a>
+                        </li>
+                        <li class="menu__list"><a href="/create/review" class="menu__link-primary"
+                                onclick="closeMenu()">Review Places</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+ 
+
+    <h1 class="title_search">Find Affordable flights</h1>
+    <div class="form_container_ap">
+
+        <div class="card_airport_label">
+
+            
+            <div class="search-wrapper">
+                <input type="text" id="searchFrom" class="search_input" placeholder="From" value="">
+                <ul id="suggestionsFrom" class="suggestions"></ul>
+            </div>
+            <div class="search-wrapper">
+                <input type="text" id="searchTo" class="search_input" placeholder="To" value="">
+                <ul id="suggestionsTo" class="suggestions"></ul>
+            </div>
+            <div class="search-wrapper">
+            <div class="date-picker-container">
+                <input type="date" id="departureDate" class="search_input datepick" readonly placeholder="Departure Date"
+                    value="">
+                </div>
+            </div>
+
+            <button id="submitBtn" class="search-btn">Search</button>
+        </div>
+    </div>
+    <div class="filter-container">
+        <select id="filter" class="filter-dropdown">
+            <option value="duration">Duration</option>
+            <option value="price">Price</option>
+            <option value="fewest_stops">Fewest Stops</option>
+            <option value="price_desc">Highest to Lowest Price</option>
+            <option value="price_asc">Lowest to Highest Price</option>
+          </select>
+    </div>
+    <div id="flightResults"></div>
+
+
+    </div>
+</body>

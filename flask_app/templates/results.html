@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Results</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/results.css')}}">
+    <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/e53bf076c4.js" crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='js/results.js') }}"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="treact__nav">
+            <div class="row">
+                <div class="logo__mask">
+                    <img class="logo__img" src="../static/assets/2.png" alt="">
+                </div>
+                <ul class="nav__links">
+                    <li class="nav__list"><a class="a" href="/flight/page">Find Flights</a></li>
+                    <li class="nav__list"><a class="a" href="/show/feed">Feed</a></li>
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                    <div class="signup">
+                        <li class="signup__primary"><a class="a__primary" href="/create/review">Review Places</a></li>
+                    </div>
+                </ul>
+
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <ul class="menu__links">
+                        <li class="menu__list"><a href="/create/review" class="menu__link-primary"
+                                onclick="closeMenu()">Review Places</a>
+                        <li class="menu__list"><a href="/flight/page" class="menu__link-primary" onclick="closeMenu()">Find Flights</a>
+                        </li>
+                        <li class="menu__list"><a href="/show/feed" class="menu__link-primary" onclick="closeMenu()">Feed</a>
+                        </li>
+                        <li class="menu__list"><a href="/dashboard" class="menu__link-primary" onclick="closeMenu()">Dashboard</a>
+                        </li>
+                        <li class="menu__list"><a href="/logout" class="menu__link" onclick="closeMenu()">Logout</a>
+                        </li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="top_bar_loc">
+        <h2 class="title_search">{{ session['term'] }} in {{session['location'].split(', ')[0] }}</h2>
+    </div>
+    
+    
+    <div class="main_container_result">
+        <section class="left_result_container" id="left_result_container">
+
+
+            <h2 class="activity_list">Browse through different activities!</h2>
+            <div class="filter">
+
+                <form class="activity-form" id="restaurant-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Restaurants">
+                    <button class="filter_btn">Restaurant <i class="fas fa-burger"></i></button>
+                </form>
+
+                <form class="activity-form" id="coffee-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Coffee">
+                    <button class="filter_btn">Coffee <i class="fas fa-coffee"></i></button>
+                </form>
+
+                <form class="activity-form" id="bar-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Bars">
+                    <button class="filter_btn">Bar <i class="fas fa-martini-glass-citrus"></i></button>
+                </form>
+
+                <form class="activity-form" id="museums-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Museums">
+                    <button class="filter_btn">Museums <i class="fas fa-building-columns"></i></button>
+                </form>
+
+
+                <form class="activity-form" id="hotel-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Hotels">
+                    <button class="filter_btn">Hotel <i class="fa-solid fa-hotel"></i></button>
+                </form>
+                <form class="activity-form" id="stadium-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Stadiums">
+                    <button class="filter_btn">Stadium <i class="fas fa-futbol"></i></button>
+                </form>
+                <form class="activity-form" id="shopping-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Shopping">
+                    <button class="filter_btn">Shopping <i class="fas fa-bag-shopping"></i></button>
+                </form>
+                <form class="activity-form" id="sightseeing-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Sightseeing">
+                    <button class="filter_btn">Sightseeing <i class="fas fa-plane"></i></button>
+                </form>
+
+                <form class="activity-form" id="parks-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Parks">
+                    <button class="filter_btn">Parks <i class="fas fa-tree"></i></button>
+                </form>
+                <form class="activity-form" id="hiking-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Hiking">
+                    <button class="filter_btn">Hiking Trails <i class="fas fa-person-hiking"></i></button>
+                </form>
+                <form class="activity-form" id="beaches-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Beaches">
+                    <button class="filter_btn">Beaches <i class="fas fa-umbrella-beach"></i></button>
+                </form>
+
+
+
+                <form class="activity-form" id="arcades-form" action="/update_term" method="post">
+                    <input type="hidden" name="term" value="Arcades">
+                    <button class="filter_btn" onclick="updateActiveButton(event)">Arcades <i
+                            class="fas fa-gamepad"></i></button>
+                </form>
+                <form id="search-form" class="formitself" action="/api/search" method="post">
+                    <div class="div">
+    
+                        <input type="hidden" name="term" value="Restaurant">
+                        <input class="search_input_left" type="search" name="location" id="search-input"
+                            placeholder=" Diffrent locations">
+                            <ul id="suggestions"></ul>
+                    </div>
+                        <button class="search_left_button" id="explore-button"><i class="fa fa-search"></i> Explore</button>
+                  </form>
+            </div>
+        </section>
+
+        <section class="right_result_container">
+
+            <div class="container">
+                {% for business in businesses %}
+                <div class="business">
+                    <div class="business-content">
+                        <h2 class="business_name">{{ business.name }}</h2>
+                        <p class="ratings_stars">
+                            <strong>Rating:</strong>
+                            {% for i in range(5) %}
+                            {% if business.rating >= i + 1 %}
+                            {%if business.rating >=4%}
+                            <i class="fas fa-star star-{{ business.rating }}" style="color: #00b6e9;"></i>
+                            {%elif business.rating < 4 %} <i class="fas fa-star star-{{ business.rating }}"
+                                style="color: #0968b0;"></i>
+                                {%endif%}
+                                {% else %}
+                                <i class="far fa-star"></i>
+                                {% endif %}
+                                {% endfor %}
+                                ({{ business.rating }} stars)
+                        </p>
+                        <a class="more_info_link" href="{{ business.url }}" target="_blank">More Info!</a>
+                    </div>
+                    <img class="iamge" src="{{ business.image_url }}" alt="{{ business.name }}">
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

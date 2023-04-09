@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+
+.logo__img {
+    width: 9.5rem;
+    margin-right: 0.75rem;
+}
+section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    padding: 24px 12px;
+    border-bottom: 1px solid rgb(237, 237, 237);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(23, 48, 73, 0.12) 0px 4px 24px;
+}
+
+.logo__mask {
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: rgb(24, 9, 84);
+}
+
+li {
+    list-style: none;
+}
+
+.header {
+    margin: 0;
+}
+/*  */
+/*  */
+
+/*  */
+/*  */
+.row {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: all 300ms ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: rgb(98, 50, 230);
+}
+
+.purple {
+    color: rgb(98, 50, 230);
+}
+
+/* LINKS */
+
+.nav__list {
+    font-size: 0.875rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+a {
+    color: black;
+}
+
+.nav__links {
+    display: flex;
+    align-items: center;
+}
+
+.signup__login {
+    padding-right: 24px;
+    color: black;
+}
+
+
+.signup {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+}
+
+.signup__login {
+    padding-right: 24px;
+}
+
+.signup__primary,
+.primary__button {
+    border: 2px solid  #3497d5;
+    background-color:  #3497d5;
+    border-radius: 50px;
+    margin-right: 20px;
+    font-weight: bold;
+    opacity: 0.95;
+    transition: all 300ms ease;
+}
+
+.a__primary {
+    color: white;
+    padding: 16px 20px;
+    font-weight: bold;
+}
+
+.a__primary:hover {
+    color: rgb(24, 23, 23);
+    text-decoration: none;
+}
+
+.signup__primary:hover {
+    opacity: 1.0;
+    /* background-color: rgb(178, 178, 178); */
+    color:  #3497d5;
+}
+
+
+/* BUTTON */
+
+.btn__menu {
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    padding-right: 20px;
+    display: none;
+    transition: all 300ms ease;
+
+}
+
+.btn__menu:hover {
+    color: rgba(79, 38, 214, 1);
+}
+
+.menu__backdrop {
+    z-index: 10;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 1.5rem 2.0rem;
+    padding: 2rem;
+    border: 1px solid gray;
+    text-align: center;
+    border-radius: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(26, 32, 44, var(--tw-text-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+    display: flex;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    transition: all 300ms ease;
+    visibility: hidden;
+    display: none;
+    display: block;
+    transform: translateX(150%) translateZ(0px);
+}
+
+.menu__backdrop,
+.btn__menu:hover {
+    cursor: pointer;
+}
+
+.menu--open .menu__backdrop {
+    visibility: visible;
+    display: flex;
+    opacity: 1;
+    display: block;
+    transform: translateX(0%) translateZ(0px);
+}
+
+.btn__menu--close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-top: 2px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+.btn__menu--close:hover {
+    color: rgba(79, 38, 214, 1);
+}
+
+
+.menu--open {
+    overflow-y: hidden;
+    max-height: 100vh;
+}
+
+.menu__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.signup__primary {
+    color: white;
+}
+
+.menu__list {
+    padding: 16px 0;
+    display: flex;
+}
+
+.menu__link {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+.menu__link-primary {
+    border: 2px solid #3497d5;
+    background-color: #3497d5;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    opacity: 0.95;
+    transition: all 300ms ease;
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.menu__link-primary:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 1;
+}
+
+@media(max-width: 1030px) {
+
+    .nav__links {
+        display: none;
+    }
+
+    .btn__menu {
+        display: block;
+    }
+
+}
+
+
+
+
+
+

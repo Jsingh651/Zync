@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/profile.css')}}">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="treact__nav">
+            <div class="row">
+                <div class="logo__mask">
+                    <img class="logo__img" src="../static/assets/2.png" alt="">
+                </div>
+                <ul class="nav__links">
+                    <li class="nav__list"><a class="a" href="/flight/page">Find flights</a></li>
+                    <li class="nav__list"><a class="a" href="/dashboard">Dashboard</a></li>
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                    <li class="signup__primary"><a class="a__primary" href="/show/feed">Feed</a></li>
+                    </div>
+                </ul>
+
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <ul class="menu__links">
+                    <li class="signup__primary"><a class="a__primary" href="/dashboard">Find Places</a></li>
+                    <li class="nav__list"><a class="a" href="/flight/page">Find flights</a></li>
+                    <li class="nav__list"><a class="a" href="/show/feed">Feed</a></li>
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <h1 class="title_search">Edit your review for {{review.location_name}}</h1>
+    <section class="formCreate">
+        <form action="/edit/review" method="post">
+            <input type="hidden" name="visitor_id" value="{{session['user_id']}}">
+            <input type="hidden" name="id" value="{{review.id}}">
+
+            {% with messages = get_flashed_messages(category_filter="city_name_error") %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="city_name_error errors">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
+            <input class="search_input-left" type="search" name="location" id="search-input"
+                        placeholder="City..." value="{{session['location']}}">
+                    <ul id="suggestions"></ul>
+
+            <select name="type" id="filter2">
+                <option name="type" value="Restaurant">Restaurant</option>
+                <option name="type" value="Bar">Bar</option>
+                <option name="type" value="Hotel">Hotel</option>
+                <option name="type" value="Coffee">Coffee</option>
+                <option name="type" value="Museums">Museums</option>
+                <option name="type" value="Hotel">Hotel</option>
+                <option name="type" value="Stadium">Stadium</option>
+                <option name="type" value="Shopping">Sightseeing</option>
+                <option name="type" value="Shopping">Shopping</option>
+                <option name="type" value="Shopping">Parks</option>
+                <option name="type" value="Shopping">Hiking Trails</option>
+                <option name="type" value="Shopping">Beaches</option>
+            </select>
+
+            {% with messages = get_flashed_messages(category_filter="location_name_error") %}
+            {% if messages %}
+            {% for message in messages %}
+            <p class="city_name_error errors">{{message}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            
+            <input class="search_input-left" type="search" name="location_name" id="search-input"
+                placeholder="Business Name..." value="{{session['location_name']}}">
+
+                {% with messages = get_flashed_messages(category_filter="date_error") %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="date_error errors">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                    <input type="date" id="departureDate" name="date_going"  class="search_input datepick" readonly placeholder="Date of Visit"
+                        value="">
+                {% with messages = get_flashed_messages(category_filter="description_error") %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="date_error errors">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+            <textarea name="description" id="" cols="10" rows="10" placeholder="Experience...">{{session['description']}}</textarea>
+
+            {% with messages = get_flashed_messages(category_filter="stars_error") %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="stars_error errors">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+            <div class="star-rating">
+                <input type="radio" id="5-stars" name="stars" value="5" onclick="updateStarRating(this)">
+                <label for="5-stars" class=" star fa fa-star"></label>
+                <input type="radio" id="4-stars" name="stars" value="4" onclick="updateStarRating(this)">
+                <label for="4-stars" class=" star fa fa-star"></label>
+                <input type="radio" id="3-stars" name="stars" value="3" onclick="updateStarRating(this)">
+                <label for="3-stars" class="star fa fa-star"></label>
+                <input type="radio" id="2-stars" name="stars" value="2" onclick="updateStarRating(this)">
+                <label for="2-stars" class="star fa fa-star"></label>
+                <input type="radio" id="1-star" name="stars" value="1" onclick="updateStarRating(this)">
+                <label for="1-star" class="star fa fa-star"></label>
+            </div>
+            <button>Submit</button>
+        </form>
+    </section>
+    </body>
+    </html>

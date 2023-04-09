@@ -5,7 +5,7 @@ from flask_app import app
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
-db = "zync"
+db = "SoloProject"
 
 class User:
     def __init__(self, data):
@@ -14,15 +14,10 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.access_token = data.get('access_token', None)  # Add this line
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.accepted = data['accepted']
 
-    @classmethod
-    def update_access_token(cls, data):
-        query = "UPDATE users SET access_token = %(access_token)s WHERE id = %(id)s;"
-        return connectToMySQL(db).query_db(query, data)
     
     @classmethod
     def get_all(cls):
@@ -56,15 +51,17 @@ class User:
         return connectToMySQL(db).query_db(query, data)
 
     @classmethod
-    def get_by_email(cls, email):
+    def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL(db).query_db(query, {'email': email})
-        return cls(result[0]) if result else None
+        result = connectToMySQL(db).query_db(query,data)
+        if len(result) < 1:
+            return False
+        return cls(result[0])
 
     @staticmethod
     def validate(user):
         is_valid = True
-        if User.get_by_email(user['email']):
+        if User.get_by_email({"email": user['email']}):
             flash('Email already exists', 'exsist')
             is_valid = False
 
@@ -83,12 +80,10 @@ class User:
         if not EMAIL_REGEX.match(user['email']): 
             flash("Invalid email address!", "email_error")
             is_valid = False
+
         if len(user['password']) < 8:
             flash('Password must be at least 8 characters', "password_error")
             is_valid = False
-        # if user.get('password') != user.get('confirm_password'):
-        #     flash("Passwords don't match")
-        #     is_valid = False
         return is_valid
     
 

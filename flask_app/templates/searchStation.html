@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/dashboard.css')}}">
+    <script defer src="{{ url_for('static', filename='js/searchStation.js') }}"></script>
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <nav class="treact__nav">
+            <div class="row">
+                <div class="logo__mask">
+                    <img class="logo__img" src="../static/assets/2.png" alt="">
+                </div>
+                <ul class="nav__links">
+                    <li class="nav__list"><a class="a" href="/flight/page">Find Flights</a></li>
+                    <li class="nav__list"><a class="a" href="/show/feed">Feed</a></li>
+
+                    <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
+                    <div class="signup">
+                        <li class="signup__primary"><a class="a__primary" href="/create/review">Review Places</a></li>
+                    </div>
+                </ul>
+
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <ul class="menu__links">
+                        <li class="menu__list"><a href="/create/review" class="menu__link-primary" onclick="closeMenu()">Review Places</a>
+                        <li class="menu__list"><a href="/flight/page" class="menu__link-primary" onclick="closeMenu()">Find Flights</a></li>
+                        <li class="menu__list"><a href="/show/feed" class="menu__link-primary" onclick="closeMenu()">Feed</a></li>
+                        <li class="menu__list"><a href="/logout" class="menu__link spec" onclick="closeMenu()">Logout</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <section id="input">
+        <div class="search_left">
+            <div class="container">
+                <h1 class="title_search">Find Perfect Places to go to.</h1>
+                <p class="para_search">We've been helping people find their dream vacation spots! <span
+                        class="purpuletext">Where will you go?</span> </p>
+                <form id="search-form" action="/api/search" method="post">
+                    <input class="search_input-left" type="search" name="location" id="search-input"
+                        placeholder="Enter a location...">
+                    <ul id="suggestions"></ul>
+                    <input type="hidden" name="term" value="Restaurant">
+                    <button class="search_left_button" id="explore-button">Explore</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,602 @@
+.btn__menu:hover{
+    background: none;
+    color: black;
+    cursor: pointer;
+}
+.a:hover{
+    color: black;
+    cursor: pointer;
+}
+.form_container_ap {
+    background-image:url(../assets/banner.png);
+    width: 80%;
+    height: 400px;
+    margin: 0 auto;
+    background-size: contain;
+    /* border: 10px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center; 
+  background-repeat: no-repeat;
+}
+
+
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-right: 12px;
+}
+.filter-container{
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 12px;
+    
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 220px;
+    max-height: 150px;
+    overflow-y: scroll;
+    background-color: white;
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+
+.suggestions li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.suggestions li:hover {
+    background-color: #eee;
+}
+
+body{
+    -webkit-font-smoothing: antialiased;
+}
+.fas.fa-plane {
+    color: #000000;
+    font-size: 1.2rem;
+  }
+
+  .locationdepar{
+    letter-spacing: 1.5px;
+    font-family: "Circular Pro", -apple-system, ".SFNSText-Regular", "San Francisco", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;}
+  
+.card_airport_label {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px ;
+    background-color: white;
+    opacity: 0.98;
+    width: 90%;
+    height: 40%;
+    padding: 12px;
+}
+
+input {
+    font-weight: bold;
+    color: rgb(9, 10, 40);
+    width: 100%;
+    height: 50px;
+    margin-right: 12px;
+    text-indent: 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(235, 235, 235);
+}
+
+button {
+    width: 17%;
+    margin-left: 12px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 400ms ease;
+    box-sizing: border-box;
+    transition: all 300ms ease;
+
+}
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+#flightResults {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+
+.flight-info p {
+    margin: 0;
+}
+
+
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: 100px;
+    top:2px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #000;
+    animation: spin 0.8s linear infinite;
+}
+.duration{
+    color: rgb(0, 90, 163);
+    border-radius: 12px;
+    width: fit-content;
+    padding: 3px 8px;
+    border: 1px solid;
+    border-color: rgb(201, 229, 247);
+    background-color: rgb(223, 240, 254);
+    font-family: "Circular Pro", -apple-system, ".SFNSText-Regular", "San Francisco", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;line-height: 14px;font-size: 12px;font-weight: 500;color: rgb(0, 90, 163);
+
+}
+.times{
+
+    font-family: "Circular Pro", -apple-system, ".SFNSText-Regular", "San Francisco", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.route-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 60%;
+}
+
+.price-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    width: 40%;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+
+.logo__img {
+    width: 9.5rem;
+    margin-left: 1.75rem;
+}
+
+section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    padding: 24px 8%;
+    border-bottom: 1px solid rgb(237, 237, 237);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(23, 48, 73, 0.12) 0px 4px 24px;
+
+}
+
+.logo__mask {
+    display: flex;
+    align-items: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: rgb(24, 9, 84);
+}
+
+li {
+    list-style: none;
+}
+
+.header {
+    margin: 0;
+}
+
+/*  */
+/*  */
+
+/*  */
+/*  */
+.row {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: all 300ms ease;
+}
+a:hover{
+    color: white;
+}
+button:hover{
+    color: white;
+}
+
+/* LINKS */
+
+.nav__list {
+    font-size: 0.875rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    font-weight: bold;
+}
+
+.nav__links {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.signup__login {
+    padding-right: 24px;
+    color: black;
+}
+
+
+.signup {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+}
+
+.signup__login {
+    padding-right: 24px;
+}
+
+.signup__primary,
+.primary__button {
+    /* border: 2px solid #3497d5; */
+    /* background-color: #3497d5; */
+    border-radius: 12px;
+    margin-right: 20px;
+    font-weight: bold;
+    opacity: 0.95;
+    transition: all 300ms ease;
+}
+
+.a__primary {
+    color: rgb(0, 0, 0);
+    background-color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+
+    font-weight: bold;
+    transition: all 300ms ease;
+    border: 1px solid black;
+}
+
+.a__primary:hover {
+    background-color: black;
+    text-decoration: none;
+}
+
+.signup__primary:hover {
+    opacity: 1.0;
+    /* background-color: rgb(178, 178, 178); */
+}
+
+
+/* BUTTON */
+
+.btn__menu {
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    text-align: center;
+    /* color: black; */
+    padding-right: 20px;
+    display: none;
+    transition: all 300ms ease;
+
+}
+
+
+.menu__backdrop {
+    z-index: 100;
+position: absolute;
+    /* position: fixed; */
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 1.5rem 2.0rem;
+    padding: 2rem;
+    border: 1px solid gray;
+    text-align: center;
+    border-radius: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(26, 32, 44, var(--tw-text-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+    display: flex;
+    /* z-index: 10; */
+    justify-content: center;
+    align-items: center;
+    transition: all 300ms ease;
+    visibility: hidden;
+    display: none;
+    display: block;
+    transform: translateX(150%) translateZ(0px);
+}
+
+.menu__backdrop,
+.btn__menu:hover {
+    cursor: pointer;
+}
+
+.menu--open .menu__backdrop {
+    visibility: visible;
+    display: flex;
+    opacity: 1;
+    display: block;
+    transform: translateX(0%) translateZ(0px);
+}
+
+#explore-button {
+    margin: 0 auto;
+    margin-top: 24px;
+}
+
+.search_left_button {
+    margin-left: 0;
+}
+
+.btn__menu--close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-top: 2px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+
+
+.menu--open {
+    overflow-y: hidden;
+    max-height: 100vh;
+}
+
+.menu__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.signup__primary {
+    color: rgb(0, 0, 0);
+}
+
+.menu__list {
+    padding: 16px 0;
+    display: flex;
+}
+
+.menu__link {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+.menu__link-primary {
+    border: 2px solid #3497d5;
+    background-color: #3497d5;
+    color: rgb(0, 0, 0);
+    padding: 8px 12px;
+    border-radius: px;
+    font-weight: bold;
+    opacity: 0.95;
+    transition: all 300ms ease;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    padding: 10px;
+}
+
+.menu__link-primary:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    opacity: 1;
+}
+
+
+.title_search {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    margin-top: 2%;
+    text-align: start;
+    margin-left: 10%;
+    font-family: Inter, system-ui;
+    --tw-text-opacity: 1;
+    color: rgba(36, 62, 99, var (--tw-text-opacity));
+    color: rgba(36, 62, 99, var(--tw-text-opacity));
+}
+
+.flight-info-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+    width: 100%;
+    /* max-width: 500px; */
+  }
+  
+  .flight-info-left {
+    width: 70%;
+    
+  }
+  .price_flight{
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    margin-top: 2%;
+    text-align: center;
+    font-family: Inter, system-ui;
+    font-weight: bold;
+    
+    
+  }
+  
+  .flight-info-right {
+    position: relative;
+    border-left: 2px solid black ;
+    width: 30%;
+    /* border: 2px solid black; */
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .locationdepar {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .fas.fa-plane {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+  
+  .duration, .locationdepar b {
+    color: #000000;
+  }
+  
+  .flight-info-container p {
+    margin: 0.5rem 0;
+  }
+  
+  .flight-info-container a {
+text-decoration: none;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+
+  }
+  .flight-info-container button{
+    width: 50%;
+    height: 40px;
+}
+
+.fa-arrow-right{
+margin-right: 20px;
+}
+
+@media(max-width: 1030px) {
+
+    .nav__links {
+        display: none;
+    }
+
+    .btn__menu {
+        display: block;
+    }
+    .form_container_ap {
+       
+        background-size: cover;
+    }
+    .card_airport_label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px ;
+        background-color: white;
+        width: 80%;
+        height: 70%;
+    }
+    input {
+        font-weight: bold;
+        color: rgb(9, 10, 40);
+        width: 120%;
+        height: 50px;
+        text-indent: 12px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+        border: 1px solid rgb(235, 235, 235);
+    }
+    .datepick{
+        margin-right: 12px;
+
+    }
+    button {
+        width: 80%;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 400ms ease;
+        box-sizing: border-box;
+    
+    }
+    .flight-info-container button{
+        font-size: 10px;
+        max-width: 100px;
+    }
+    .flight-info-container button .fa-arrow-right{
+        display: none;
+    }
+}

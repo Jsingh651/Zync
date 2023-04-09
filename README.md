@@ -87,4 +87,4 @@ msg = Message(f"Welcome to Zync, {request.form['first_name']}!", sender="nono@gm
         image_data_b64 = b64encode(image_data).decode('utf-8')
         msg.html = render_template('WelcomeEmail.html', image=image_data_b64)
         msg.attach("runningPeeps.png", "image/png", image_data, "inline", headers=[["Content-ID", "<logo>"]])
-        mail.send(msg)
+        mail.send(msg)# SoloProject

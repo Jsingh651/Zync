@@ -3,7 +3,7 @@ import re
 from flask import flash
 from flask_app import app
 from flask_app.models import users
-db = "SoloProject"
+db = "solo_project"
 
 class Review:
     def __init__(self, data):

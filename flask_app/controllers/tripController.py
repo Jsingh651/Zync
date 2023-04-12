@@ -82,18 +82,6 @@ def editReview():
     Review.update(data)
     return redirect("/create/review")
 
-@app.route('/update/sighting', methods = ['POST'])
-def update_sight():
-    data = {
-        'id': request.form['id'],
-        'location': request.form['location'],
-        'decription': request.form['decription'],
-        'num_of_ss': request.form['num_of_ss'],
-        'date': request.form['date'],
-        'user_id': request.form['user_id']
-    }
-    Sighting.update_sighitng(data)
-    return redirect('/dashboard')
 
 
 @app.route("/show/feed")

@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     flatpickr('#departureDate');
 });
 
-const API_KEY = "DQ94eb1kiBSSosL3XFuEGp8KtUgbgXXy";
-// const API_KEY = "BB1Gixhwq2jBMBsGss1-8NZgJXjFy40q";
+// const API_KEY = "DQ94eb1kiBSSosL3XFuEGp8KtUgbgXXy";
+const API_KEY = "BB1Gixhwq2jBMBsGss1-8NZgJXjFy40q";
 const searchFrom = document.getElementById("searchFrom");
 const searchTo = document.getElementById("searchTo");
 const suggestionsFrom = document.getElementById("suggestionsFrom");
@@ -53,7 +53,7 @@ function setupSearch(inputElement, suggestionsElement) {
 
     inputElement.addEventListener("input", async (event) => {
         const searchTerm = event.target.value;
-        if (searchTerm.length >= 0) {
+        if (searchTerm.length >= 2) {
             try {
                 suggestionsElement.appendChild(spinnerElement);
 
@@ -69,7 +69,15 @@ function setupSearch(inputElement, suggestionsElement) {
             clearSuggestions(suggestionsElement);
         }
     });
+
+    inputElement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            clearSuggestions(suggestionsElement);
+        }
+    });
 }
+
 
 
 setupSearch(searchFrom, suggestionsFrom);
@@ -80,7 +88,7 @@ submitBtn.addEventListener("click", async () => {
     const to = searchTo.value;
     const date = departureDate.value;
 
-    if (from && to && date) {
+    if (from.length === 3 && to.length === 3 && date) {
         try {
             const flightData = await searchFlights(from, to, date);
             displayFlights(flightData);
@@ -95,9 +103,10 @@ submitBtn.addEventListener("click", async () => {
             console.error("Error fetching flight data:", error);
         }
     } else {
-        alert("Please enter valid airport codes and date.");
+        alert("Please enter valid 3-letter airport codes and date.");
     }
 });
+
 
 searchFrom.value = sessionStorage.getItem("from");
 searchTo.value = sessionStorage.getItem("to");
@@ -119,7 +128,6 @@ async function searchAirports(term) {
     const data = await response.json();
     const cities = data.locations;
 
-    // Retrieve airports for each city
     const airports = [];
     for (const city of cities) {
         const airportResponse = await fetch(
@@ -178,6 +186,7 @@ async function searchFlights(from, to, date) {
     const data = await response.json();
     return data.data;
 }
+
 function formatDate(dateString) {
     const date = new Date(dateString);
     const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -235,28 +244,24 @@ function displayFlights(flightData, filter = "default") {
         const flightInfo = document.createElement("div");
         flightInfo.className = "flight-info-container";
         flightInfo.innerHTML = `
-              <div class="flight-info-left">
-                  <p class="locationdepar"> <b> ${flight.cityFrom} </b>  (${flight.flyFrom}) </p>
-                  <p class="times" ><i class="fas fa-plane-departure"></i>  ${formatDate(flight.local_departure)}<b> ${formatTime(flight.local_departure)}</b></p>
-                  <p>Airline: ${flight.airlines[0]}</p>
-                  <p class="duration"> ${duration.hours}h ${duration.minutes}m</p>
-                  <p>Stops: ${flight.route.length - 1}</p>
-                  <p class="times"><i class="fas fa-plane-arrival"></i> ${formatDate(flight.local_arrival)} <b> ${formatTime(flight.local_arrival)} </b></p>
-                  <p> <b>${flight.cityTo} </b> (${flight.flyTo})</p>
-              </div>
-              <div class="flight-info-right">
-                  <p class="price_flight">$${flight.price}</p>
-                  <button> <a href="https://www.kiwi.com/en/booking?token=${flight.booking_token}" target="_blank" rel="noopener noreferrer">Buy Ticket</a> <i class="fas fa-arrow-right"></i></button>
-              </div>
-          `;
+            <div class="flight-info-left">
+                <p class="locationdepar"> <b> ${flight.cityFrom} </b>  (${flight.flyFrom}) </p>
+                <p class="times" ><i class="fas fa-plane-departure"></i>  ${formatDate(flight.local_departure)}<b> ${formatTime(flight.local_departure)}</b></p>
+                <p>Airline: ${flight.airlines[0]}</p>
+                <p class="duration"> ${duration.hours}h ${duration.minutes}m</p>
+                <p>Stops: ${flight.route.length - 1}</p>
+                <p class="times"><i class="fas fa-plane-arrival"></i> ${formatDate(flight.local_arrival)} <b> ${formatTime(flight.local_arrival)} </b></p>
+                <p> <b>${flight.cityTo} </b> (${flight.flyTo})</p>
+            </div>
+            <div class="flight-info-right">
+                <p class="price_flight">$${flight.price}</p>
+                <button> <a href="https://www.kiwi.com/en/booking?token=${flight.booking_token}" target="_blank" rel="noopener noreferrer">Buy Ticket</a> <i class="fas fa-arrow-right"></i></button>
+            </div>
+        `;
         flightResults.appendChild(flightInfo);
     });
     localStorage.setItem("flightData", JSON.stringify(flightData));
 }
-
-
-
-
 
 function calculateDuration(utc_departure, utc_arrival) {
     const departureTime = new Date(utc_departure).getTime();
@@ -276,17 +281,14 @@ window.addEventListener("load", () => {
         displayFlights(parsedData);
     }
 });
+let contrastToggle = false;
 
-async function fetchAirlineLogo(airlineCode) {
-    try {
-        const response = await fetch(`https://www.airlinecodes.info/logo/${airlineCode}`);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch airline logo: ${response.status}`);
-        }
-        const logoUrl = await response.text();
-        return logoUrl;
-    } catch (error) {
-        console.error("Error fetching airline logo:", error);
-        return "";
-    }
+function toggleContrast(){
+    contrastToggle = !contrastToggle;
+        if (contrastToggle){
+    document.body.classList += " dark-theme"
+}
+else {
+    document.body.classList.remove("dark-theme")
+}
 }

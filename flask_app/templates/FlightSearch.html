@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
-<!-- <script defer src="../static/js/flightSearch.js"></script> -->
+    <!-- <script defer src="../static/js/flightSearch.js"></script> -->
 
     <script defer src="{{ url_for('static', filename='js/flightSearch.js') }}"></script>
 
@@ -26,6 +26,7 @@
                     <img class="logo__img" src="../static/assets/2.png" alt="">
                 </div>
                 <ul class="nav__links">
+                    <li class="nav__list" onclick="toggleContrast()"><i class="fas fa-adjust"></i></li>
                     <li class="nav__list"><a class="a" href="/dashboard">Find places</a></li>
                     <li class="nav__list"><a class="a" href="/show/feed">Feed</a></li>
                     <li class="nav__list"><a class="a" href="/logout">Logout</a></li>
@@ -38,7 +39,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="menu__backdrop">
-                    <button  class="btn__menu btn__menu--close" onclick="closeMenu()">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
                         <i class="fas fa-times"></i>
                     </button>
 
@@ -58,43 +59,42 @@
         </nav>
 
     </header>
- 
+    <div class="bakcgroundchange">
 
-    <h1 class="title_search">Find Affordable flights</h1>
-    <div class="form_container_ap">
+        <h1 class="title_search">Find Affordable flights</h1>
+        <div class="form_container_ap">
 
-        <div class="card_airport_label">
+            <div class="card_airport_label">
 
-            
-            <div class="search-wrapper">
-                <input type="text" id="searchFrom" class="search_input" placeholder="From" value="">
-                <ul id="suggestionsFrom" class="suggestions"></ul>
-            </div>
-            <div class="search-wrapper">
-                <input type="text" id="searchTo" class="search_input" placeholder="To" value="">
-                <ul id="suggestionsTo" class="suggestions"></ul>
-            </div>
-            <div class="search-wrapper">
-            <div class="date-picker-container">
-                <input type="date" id="departureDate" class="search_input datepick" readonly placeholder="Departure Date"
-                    value="">
+
+                <div class="search-wrapper">
+                    <input type="text" id="searchFrom" class="search_input" placeholder="From" value="">
+                    <ul id="suggestionsFrom" class="suggestions"></ul>
                 </div>
+                <div class="search-wrapper">
+                    <input type="text" id="searchTo" class="search_input" placeholder="To" value="">
+                    <ul id="suggestionsTo" class="suggestions"></ul>
+                </div>
+                <div class="search-wrapper">
+                    <div class="date-picker-container">
+                        <input type="date" id="departureDate" class="search_input datepick" readonly
+                            placeholder="Departure Date" value="">
+                    </div>
+                </div>
+
+                <button id="submitBtn" class="search-btn">Search</button>
             </div>
-
-            <button id="submitBtn" class="search-btn">Search</button>
         </div>
+        <div class="filter-container">
+            <select id="filter" class="filter-dropdown">
+                <option value="duration">Duration</option>
+                <option value="price">Price</option>
+                <option value="fewest_stops">Fewest Stops</option>
+                <option value="price_desc">Highest to Lowest Price</option>
+                <option value="price_asc">Lowest to Highest Price</option>
+            </select>
+        </div>
+        <div id="flightResults"></div>
     </div>
-    <div class="filter-container">
-        <select id="filter" class="filter-dropdown">
-            <option value="duration">Duration</option>
-            <option value="price">Price</option>
-            <option value="fewest_stops">Fewest Stops</option>
-            <option value="price_desc">Highest to Lowest Price</option>
-            <option value="price_asc">Lowest to Highest Price</option>
-          </select>
-    </div>
-    <div id="flightResults"></div>
-
-
     </div>
 </body>

@@ -3,6 +3,10 @@ from pprint import pprint
 from flask_app import app
 from flask import Flask, redirect, session, render_template, flash,request, Markup
 from urllib.parse import quote
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 @app.template_filter()
@@ -64,15 +68,16 @@ def login ():
     session['user_id'] = user_in_db.id
     return redirect ('/dashboard')
 
+import os
 
 @app.route('/dashboard')
 def dashboard():
+    api_key = os.environ.get('AUTOCOMPLETEAPI')
     if not session:
         return redirect('/privacy/policy')
     data = {'id': session['user_id']}
-    return render_template('searchStation.html')
+    return render_template('searchStation.html', api_key = api_key)
 
-# Route that shows the dashboard get's one user #
 
 @app.route('/logout')
 def logout():
@@ -80,7 +85,8 @@ def logout():
     return redirect('/')
 
 
-yelp_api = YelpAPI('k6sjLs3cUQXd-tCrwsHr_toAKMPKfOxWvBy5e6ZmUHs6tdLowuoYIKRuZ6d7fyh06d_qkqGet1l4eAa3URpbsQF2ZBdbqglgLiU9yjA1Q5bqudqH-Kb7uEDB5lQuZHYx')
+yelp_api_key = os.environ.get('YELP_API_KEY')
+yelp_api = YelpAPI(yelp_api_key)
 
 @app.route("/ListOfRest")
 def ListPage():
@@ -88,8 +94,8 @@ def ListPage():
         return redirect('/privacy/policy')
     businesses = session.get('businesses', [])
     location = session['location']
-    print("Location", location)
-    return render_template("results.html", businesses=businesses, location = location)
+    api_key = os.environ.get('AUTOCOMPLETEAPI')
+    return render_template("results.html", businesses=businesses, location = location, api_key=api_key)
 
 @app.route("/api/search", methods=['POST'])
 def returnapirSearch():
@@ -102,7 +108,7 @@ def returnapirSearch():
     term = request.form.get('term', 'Restaurant')
     session['term'] = term
     response = yelp_api.search_query(term=term, location=location)
-    pprint(response)
+    # pprint(response)
     businesses = []
     for business in response['businesses']:
         businesses.append({

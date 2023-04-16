@@ -7,12 +7,18 @@ from flask import Flask, redirect, session, render_template, flash,request, Mark
 from flask import Flask, redirect, session, render_template, flash, request, jsonify
 import json
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @app.route("/flight/page")
 def flightPage():
     if not session:
         return redirect('/privacy/policy')
-    return render_template("FlightSearch.html")
+    api_key = os.environ.get('API_KEY')
+    print("FLIGHTAPI", api_key)
+    return render_template("FlightSearch.html", api_key = api_key)
 
 @app.route("/create/review")
 def createTrip():
@@ -21,8 +27,9 @@ def createTrip():
     reviews = Review.reviews_with_user()
     data = {'id': session['user_id']}
     user = User.get_one(data)
-
-    return render_template("profile.html", reviews = reviews, user= user)
+    api_key = os.environ.get('AUTOCOMPLETEAPI')
+    print("api KEY", api_key)
+    return render_template("profile.html", reviews = reviews, user= user, api_key = api_key)
 
 @app.route("/delete/review/<int:id>")
 def deleteRoute(id):
@@ -59,7 +66,8 @@ def editreview(id):
     data = {'id': id}
     review = Review.get_one(data)
     user = session['user_id']
-    return render_template("editForm.html", review = review,user = user)
+    api_key = os.environ.get('AUTOCOMPLETEAPI')
+    return render_template("editForm.html", review = review,user = user, api_key = api_key)
 
 @app.route('/edit/review', methods=['POST'])
 def editReview():

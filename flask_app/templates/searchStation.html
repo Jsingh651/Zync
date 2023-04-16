@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{{url_for('static', filename = 'css/dashboard.css')}}">
     <script defer src="{{ url_for('static', filename='js/searchStation.js') }}"></script>
     <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-
+    <script>
+    const AUTOCOMPLETEAPI = "{{ api_key }}";
+    </script>
 </head>
 
 <body>

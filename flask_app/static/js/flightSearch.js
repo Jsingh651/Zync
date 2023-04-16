@@ -37,8 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
     flatpickr('#departureDate');
 });
 
-// const API_KEY = "DQ94eb1kiBSSosL3XFuEGp8KtUgbgXXy";
-const API_KEY = "BB1Gixhwq2jBMBsGss1-8NZgJXjFy40q";
 const searchFrom = document.getElementById("searchFrom");
 const searchTo = document.getElementById("searchTo");
 const suggestionsFrom = document.getElementById("suggestionsFrom");
@@ -110,7 +108,7 @@ submitBtn.addEventListener("click", async () => {
 
 searchFrom.value = sessionStorage.getItem("from");
 searchTo.value = sessionStorage.getItem("to");
-
+console.log(API_KEY)
 async function searchAirports(term) {
     const response = await fetch(
         `https://tequila-api.kiwi.com/locations/query?term=${term}&location_types=city`,

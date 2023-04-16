@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const searchInput = document.getElementById('search-input');
         const suggestions = document.getElementById('suggestions');
-        const apiKey = '025c442e38884f13ae715db4f47f7c71';
 
         searchInput.addEventListener('input', async (event) => {
             const query = event.target.value;
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&apiKey=${apiKey}`);
+            const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&apiKey=${AUTOCOMPLETEAPI}`);
             const data = await response.json();
 
             displaySuggestions(data.features);

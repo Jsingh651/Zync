@@ -1,13 +1,12 @@
 {
     "functions": {
-      "api/index.py": {
+      "vercel_index.py": {
         "runtime": "python3.9",
-        "handler": "vercel_index.handler",
         "maxDuration": 10
       }
     },
     "routes": [
-      { "src": "/(.*)", "dest": "api/index.py" }
+      { "src": "/(.*)", "dest": "vercel_index.py" }
     ]
   }
   

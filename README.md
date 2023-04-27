@@ -1,0 +1,1 @@
+App made using API's, Flask, Javascript and a whole lot of CSS. App is desgined for people who love to travel because a user can find all the things they want in one place, from Hiking trails to Booking Flights.
